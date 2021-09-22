@@ -2,46 +2,46 @@ import sys
 from string import ascii_letters
 
 
-def recursion(num_list, symbol, i):
-    long = len(num_list)
-    if i == long - 1 and not num_list[i].isalpha():
+def recursion_check(list_num, operation_signs, ind):
+    long = len(list_num)
+    if ind == long - 1 and not list_num[ind].isalpha():
         return True
     else:
-        if num_list[i].isdecimal():
-            return recursion(num_list, symbol, i + 1)
-        elif symbol.count(num_list[i]) == 1:
-            if i <= long - 1 and symbol.count(num_list[i + 1]) == 1:
+        if list_num[ind].isdecimal():
+            return recursion_check(list_num, operation_signs, ind + 1)
+        elif operation_signs.count(list_num[ind]) == 1:
+            if ind <= long - 1 and operation_signs.count(list_num[ind + 1]) == 1:
                 return False
-            elif symbol.count(num_list[long - 1]) == 1:
+            elif operation_signs.count(list_num[long - 1]) == 1:
                 return False
             else:
-                return recursion(num_list, symbol, i + 1)
+                return recursion_check(list_num, operation_signs, ind + 1)
         else:
             return False
 
 
 argument = sys.argv[1:]
-i = 0
+indicator = 0
 symbol = ('+', '-')
 
 num_list = []
-num = ''
+line = ''
 if argument:
     for char in argument[0]:
         if char.isdigit() or char in ascii_letters:
-            num += char
+            line += char
         else:
-            if num != '':
-                num_list.append(num)
-                num = ''
+            if line != '':
+                num_list.append(line)
+                line = ''
             if symbol.count(char):
                 num_list.append(char)
-    if num != '':
-        num_list.append(num)
+    if line != '':
+        num_list.append(line)
 else:
-    num_list.append("a")
+    num_list.append("None")
 
-if recursion(num_list, symbol, i):
-    print(f"({recursion(num_list, symbol, i)}, {eval(''.join(argument))})")
+if recursion_check(num_list, symbol, indicator):
+    print(f"({recursion_check(num_list, symbol, indicator)}, {eval(''.join(argument))})")
 else:
-    print(f"({recursion(num_list, symbol, i)}, {None})")
+    print(f"({recursion_check(num_list, symbol, indicator)}, {None})")

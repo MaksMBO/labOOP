@@ -1,11 +1,12 @@
-def knapsack(roominess, bag, number):
-    if number == 0 or roominess == 0:
+def solution(roominess_backpack, backpack, quantity):
+    if quantity == 0 or roominess_backpack == 0:
         return False
-    if (bag[number - 1] > roominess):
-        return knapsack(roominess, bag, number - 1)
+    if backpack[quantity - 1] > roominess_backpack:
+        return solution(roominess_backpack, backpack, quantity - 1)
     else:
-        return max(bag[number - 1] + knapsack(roominess - bag[number - 1], bag, number - 1),
-        knapsack(roominess, bag, number - 1))
+        return max(
+            backpack[quantity - 1] + solution(roominess_backpack - backpack[quantity - 1], backpack, quantity - 1),
+            solution(roominess_backpack, backpack, quantity - 1))
 
 
 bag = []
@@ -17,10 +18,11 @@ try:
         ingot = int(input("Ingot: "))
         bag.append(ingot)
 
-    if knapsack(roominess, bag, number):
-        print(knapsack(roominess, bag, number))
+    if solution(roominess, bag, number):
+        print(solution(roominess, bag, number))
     else:
         print("Something went wrong")
 except ValueError:
     print("You did not enter incorrect data!")
-
+except IndexError:
+    print("None")

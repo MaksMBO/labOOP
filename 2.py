@@ -2,7 +2,6 @@ import sys
 
 argument = sys.argv[1:]
 
-
 arithmetic = {"add": "+",
               "sub": "-",
               "mul": "*",

@@ -10,4 +10,3 @@ except NameError:
     print("None")
 except ZeroDivisionError:
     print("None")
-
