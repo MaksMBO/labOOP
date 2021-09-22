@@ -9,16 +9,18 @@ def knapsack(roominess, bag, number):
 
 
 bag = []
-roominess = int(input("Roominess: "))
-number = int(input("Number: "))
-i = 0
+try:
+    roominess = int(input("Roominess: "))
+    number = int(input("Number: "))
 
-for i in range(0, number):
-    ingot = int(input("Ingot: "))
-    i += 1
-    bag.append(ingot)
+    for i in range(0, number):
+        ingot = int(input("Ingot: "))
+        bag.append(ingot)
 
-if knapsack(roominess, bag, number):
-    print(knapsack(roominess, bag, number))
-else:
-    print("Something went wrong")
+    if knapsack(roominess, bag, number):
+        print(knapsack(roominess, bag, number))
+    else:
+        print("Something went wrong")
+except ValueError:
+    print("You did not enter incorrect data!")
+
